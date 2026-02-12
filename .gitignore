@@ -1,0 +1,44 @@
+# Security
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python
+venv/
+.venv/
+env/
+.env/
+bin/
+lib/
+share/
+pyvenv.cfg
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.docusaurus/
+build/
+.cache/
+.temp/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Project Specific
+physical-ai-book/build/
+physical-ai-book/.docusaurus/
+physical-ai-book/node_modules/
+backend/venv/
+backend/__pycache__/
+nul
