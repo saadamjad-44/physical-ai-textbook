@@ -49,6 +49,19 @@ const DocToolbar = () => {
         window.print();
     };
 
+    const handleChatGPT = () => {
+        // Get text from the main article
+        const article = document.querySelector('article');
+        const text = article ? article.innerText.substring(0, 2000) : ''; // Limit to 2000 context
+
+        // Copy to clipboard
+        navigator.clipboard.writeText(`I am studying this Physical AI topic:\n\n${text}\n\nCan you explain this concept in simple terms and give examples?`);
+
+        // Open ChatGPT
+        alert("I've copied the page context to your clipboard! 📋\n\nPaste it into ChatGPT to ask specific questions.");
+        window.open('https://chatgpt.com/', '_blank');
+    };
+
     return (
         <div className="doc-floating-toolbar">
             <button
@@ -57,6 +70,9 @@ const DocToolbar = () => {
                 title={isSpeaking ? "Stop Listening" : "Listen to this page"}
             >
                 {isSpeaking ? '🔇 Stop' : '🔊 Listen'}
+            </button>
+            <button onClick={handleChatGPT} className="toolbar-btn" title="Ask ChatGPT about this page">
+                🤖 Ask GPT
             </button>
             <button onClick={handleShare} className="toolbar-btn" title="Share this page">
                 🔗 Share

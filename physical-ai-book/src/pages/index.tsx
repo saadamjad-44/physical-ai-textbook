@@ -16,7 +16,10 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
+        <div style={{ marginTop: '1rem', fontStyle: 'italic', opacity: 0.9, fontSize: '1.1rem' }}>
+          By <span style={{ fontWeight: 'bold', color: 'var(--ifm-color-primary-lightest)' }}>Saad Amjad</span>
+        </div>
+        <div className={styles.buttons} style={{ marginTop: '2rem' }}>
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
