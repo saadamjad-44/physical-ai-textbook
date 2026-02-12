@@ -1,15 +1,14 @@
-import type {ReactNode} from 'react';
+import type { ReactNode } from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
@@ -21,7 +20,7 @@ function HomepageHeader() {
           <Link
             className="button button--secondary button--lg"
             to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
+            Start Reading the Textbook 📚
           </Link>
         </div>
       </div>
@@ -30,14 +29,20 @@ function HomepageHeader() {
 }
 
 export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title="Welcome"
+      description="Physical AI & Humanoid Robotics Textbook">
       <HomepageHeader />
       <main>
-        <HomepageFeatures />
+        <section className={styles.features}>
+          <div className="container" style={{ padding: '4rem 0', textAlign: 'center' }}>
+            <h2>Open-Source Curriculum for the Next Generation of Robotics</h2>
+            <p style={{ fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
+              Master ROS 2, Simulation, NVIDIA Isaac, and Vision-Language-Action models through a hands-on, AI-native learning journey.
+            </p>
+          </div>
+        </section>
       </main>
     </Layout>
   );
