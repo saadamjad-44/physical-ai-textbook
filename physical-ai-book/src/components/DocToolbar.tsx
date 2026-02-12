@@ -52,14 +52,21 @@ const DocToolbar = () => {
     const handleChatGPT = () => {
         // Get text from the main article
         const article = document.querySelector('article');
-        const text = article ? article.innerText.substring(0, 2000) : ''; // Limit to 2000 context
+        const text = article ? article.innerText.substring(0, 1500) : ''; // Limit to 1500 chars for URL safety
+        const fullText = article ? article.innerText.substring(0, 4000) : ''; // More allowed for clipboard
 
-        // Copy to clipboard
-        navigator.clipboard.writeText(`I am studying this Physical AI topic:\n\n${text}\n\nCan you explain this concept in simple terms and give examples?`);
+        const prompt = `I am studying this Physical AI topic:\n\n${text}\n\nCan you explain this concept in simple terms and give examples?`;
 
-        // Open ChatGPT
-        alert("I've copied the page context to your clipboard! 📋\n\nPaste it into ChatGPT to ask specific questions.");
-        window.open('https://chatgpt.com/', '_blank');
+        // 1. Copy full text to clipboard (Reliable backup)
+        navigator.clipboard.writeText(`I am studying this Physical AI topic:\n\n${fullText}\n\nCan you explain this concept in simple terms and give examples?`);
+
+        // 2. Open ChatGPT with query param (Best effort auto-fill)
+        // Note: ChatGPT may treat this as a search or a prompt depending on A/B tests
+        const encodedPrompt = encodeURIComponent(prompt);
+        window.open(`https://chatgpt.com/?q=${encodedPrompt}&hints=search`, '_blank');
+
+        // Notify user about clipboard backup
+        // alert("Opening ChatGPT... \n\nI've also copied the full page context to your clipboard in case the auto-fill doesn't work perfectly! 📋");
     };
 
     return (
