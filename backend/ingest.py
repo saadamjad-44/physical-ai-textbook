@@ -1,7 +1,11 @@
 import os
 import glob
+import time
 from rag_utils import get_embedding, qdrant
 from qdrant_client.models import PointStruct, VectorParams, Distance
+from dotenv import load_dotenv
+
+load_dotenv()
 
 DOCS_DIR = "../physical-ai-book/docs"
 COLLECTION_NAME = "textbook_content"
@@ -24,26 +28,39 @@ def ingest_data():
         print("Skipping Qdrant ingestion: API Key not found.")
         return
 
-    # Create collection if not exists
+    if not os.getenv("GEMINI_API_KEY"):
+        print("Skipping ingestion: GEMINI_API_KEY not found.")
+        return
+
+    # First, get the embedding dimension from a test embedding
+    print("Detecting embedding dimensions...")
+    test_embedding = get_embedding("test")
+    embedding_size = len(test_embedding)
+    print(f"Embedding dimension: {embedding_size}")
+
+    # Create collection
     try:
-        qdrant.recreate_collection(
+        if qdrant.collection_exists(COLLECTION_NAME):
+            qdrant.delete_collection(COLLECTION_NAME)
+        
+        qdrant.create_collection(
             collection_name=COLLECTION_NAME,
-            vectors_config=VectorParams(size=1536, distance=Distance.COSINE),
+            vectors_config=VectorParams(size=embedding_size, distance=Distance.COSINE),
         )
+        print(f"Collection '{COLLECTION_NAME}' created with size={embedding_size}.")
     except Exception as e:
         print(f"Error creating collection: {e}")
+        return
 
     documents = read_markdown_files(DOCS_DIR)
-    points = []
-    
     print(f"Found {len(documents)} documents to ingest.")
 
     for idx, doc in enumerate(documents):
-        # In a real scenario, we would chunk the content here
-        # For now, we take the first 1000 chars as a simplifed chunk
-        chunk = doc["content"][:1000] 
+        # Truncate very long docs to avoid API limits
+        chunk = doc["content"][:2000]
         
         try:
+            print(f"  [{idx+1}/{len(documents)}] Embedding {doc['filename']}...")
             embedding = get_embedding(chunk)
             
             point = PointStruct(
@@ -55,16 +72,21 @@ def ingest_data():
                     "text": chunk
                 }
             )
-            points.append(point)
+            
+            # Upload one at a time to avoid timeout
+            qdrant.upsert(
+                collection_name=COLLECTION_NAME,
+                points=[point]
+            )
+            print(f"  ✓ {doc['filename']} ingested successfully.")
+            
+            # Small delay to respect rate limits
+            time.sleep(0.5)
+            
         except Exception as e:
-            print(f"Error embedding document {doc['filename']}: {e}")
+            print(f"  ✗ Error with {doc['filename']}: {e}")
 
-    if points:
-        qdrant.upsert(
-            collection_name=COLLECTION_NAME,
-            points=points
-        )
-        print(f"Successfully ingested {len(points)} documents.")
+    print("\n=== Ingestion Complete ===")
 
 if __name__ == "__main__":
     ingest_data()

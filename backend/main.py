@@ -18,7 +18,7 @@ app.add_middleware(
 async def root():
     return {
         "message": "Welcome to the Physical AI & Humanoid Robotics Textbook API",
-        "openai_configured": os.getenv("OPENAI_API_KEY") is not None,
+        "gemini_configured": os.getenv("GEMINI_API_KEY") is not None,
         "qdrant_configured": os.getenv("QDRANT_URL") is not None
     }
 
@@ -28,12 +28,15 @@ class ChatRequest(BaseModel):
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
-    if not os.getenv("OPENAI_API_KEY"):
-        return {"response": f"Chat is in demo mode (OpenAI not configured). You said: {request.message}"}
+    if not os.getenv("GEMINI_API_KEY"):
+        return {"response": f"Chat is in demo mode (Gemini not configured). You said: {request.message}"}
     
     try:
         results = rag_utils.search_content(request.message)
-        # In a real implementation, we would pass 'results' to OpenAI for a contextual response.
-        return {"response": f"Found {len(results)} relevant sections. (RAG logic integrated)"}
+        if not results:
+             return {"response": "I couldn't find any specific information in the textbook about that. However, I can help you with general Robotics knowledge!"}
+             
+        answer = rag_utils.generate_answer(request.message, results)
+        return {"response": answer}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
