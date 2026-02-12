@@ -1,0 +1,81 @@
+/* Add to src/css/custom.css or create new file */
+
+.doc-floating-toolbar {
+    position: fixed;
+    bottom: 20px;
+    /* Aligned with ChatWidget which is usually bottom-right */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    gap: 15px;
+    z-index: 100;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.toolbar-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.toolbar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.toolbar-btn.active {
+    background: rgba(59, 130, 246, 0.5);
+    color: #fff;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+}
+
+/* Print Styling for PDF Download */
+@media print {
+
+    .doc-floating-toolbar,
+    .chat-widget-container,
+    .navbar,
+    .footer,
+    .pagination-nav {
+        display: none !important;
+    }
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .markdown {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+    }
+}

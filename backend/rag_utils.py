@@ -26,11 +26,11 @@ def search_content(query, limit=3):
     """Search for relevant content in Qdrant."""
     query_vector = get_embedding(query)
     
-    search_result = qdrant.search(
+    search_result = qdrant.query_points(
         collection_name="textbook_content",
-        query_vector=query_vector,
+        query=query_vector,
         limit=limit
-    )
+    ).points
     return search_result
 
 def generate_answer(query, context_chunks):
