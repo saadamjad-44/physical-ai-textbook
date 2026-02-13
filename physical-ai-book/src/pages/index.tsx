@@ -44,6 +44,18 @@ export default function Home(): ReactNode {
             <p style={{ fontSize: '1.2rem', maxWidth: '800px', margin: '0 auto' }}>
               Master ROS 2, Simulation, NVIDIA Isaac, and Vision-Language-Action models through a hands-on, AI-native learning journey.
             </p>
+            <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+              <Link
+                className="button button--secondary button--lg"
+                to="/docs/hardware/workstation-setup">
+                Setup Workstation 🖥️
+              </Link>
+              <Link
+                className="button button--secondary button--lg"
+                to="/docs/hardware/jetson-setup">
+                Setup Jetson 🧠
+              </Link>
+            </div>
           </div>
         </section>
       </main>
