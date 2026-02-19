@@ -51,6 +51,10 @@ export default function Signin() {
                         {loading ? 'Signing In...' : 'Sign In'}
                     </button>
                 </form>
+
+                <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+                    Don't have an account? <a href="/signup">Sign Up</a>
+                </p>
             </div>
         </Layout>
     );

@@ -41,4 +41,6 @@ physical-ai-book/.docusaurus/
 physical-ai-book/node_modules/
 backend/venv/
 backend/__pycache__/
+auth-server/node_modules/
+auth-server/.env
 nul

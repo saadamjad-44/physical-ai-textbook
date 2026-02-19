@@ -31,47 +31,9 @@ async def root():
         "message": "Welcome to the Physical AI & Humanoid Robotics Textbook API",
         "gemini_configured": os.getenv("GEMINI_API_KEY") is not None,
         "qdrant_configured": os.getenv("QDRANT_URL") is not None,
-        "neon_configured": os.getenv("NEON_DATABASE_URL") is not None
+        "neon_configured": os.getenv("NEON_DATABASE_URL") is not None,
+        "auth": "better-auth (separate server on port 3001)"
     }
-
-
-# ===== AUTH ENDPOINTS =====
-
-class SignupRequest(BaseModel):
-    name: str
-    email: str
-    password: str
-    softwareExp: str = "beginner"
-    hardwareExp: str = "none"
-    education: str = "undergrad"
-    goals: str = ""
-
-@app.post("/api/signup")
-async def signup(request: SignupRequest):
-    user = db.save_user(
-        name=request.name,
-        email=request.email,
-        password=request.password,
-        software_exp=request.softwareExp,
-        hardware_exp=request.hardwareExp,
-        education=request.education,
-        goals=request.goals
-    )
-    if user is None:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    return {"message": "User created successfully", "user": user}
-
-
-class SigninRequest(BaseModel):
-    email: str
-    password: str
-
-@app.post("/api/signin")
-async def signin(request: SigninRequest):
-    user = db.get_user(email=request.email, password=request.password)
-    if user is None:
-        raise HTTPException(status_code=401, detail="Invalid email or password")
-    return {"message": "Login successful", "user": user}
 
 
 # ===== CHAT ENDPOINTS =====

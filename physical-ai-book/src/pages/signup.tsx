@@ -16,7 +16,7 @@ export default function Signup() {
         softwareExp: 'beginner',
         hardwareExp: 'none',
         education: 'undergrad',
-        goals: ''
+        goals: '',
     });
 
     const handleChange = (e) => {
@@ -39,7 +39,7 @@ export default function Signup() {
     };
 
     return (
-        <Layout title="Signup" description="Join the Physical AI Course">
+        <Layout title="Signup" description="Create an account for Physical AI Course">
             <div className="auth-container">
                 <h1>Create Account</h1>
                 <p>Tell us about yourself to personalize your learning experience.</p>
@@ -53,9 +53,8 @@ export default function Signup() {
                 <form onSubmit={handleSubmit} className="auth-form">
                     <div className="form-group">
                         <label>Name</label>
-                        <input required name="name" onChange={handleChange} />
+                        <input required type="text" name="name" onChange={handleChange} />
                     </div>
-
                     <div className="form-group">
                         <label>Email</label>
                         <input required type="email" name="email" onChange={handleChange} />
@@ -69,29 +68,31 @@ export default function Signup() {
                     <h3>Background Information</h3>
 
                     <div className="form-group">
-                        <label>Software Experience (Python, ROS)</label>
-                        <select name="softwareExp" onChange={handleChange}>
-                            <option value="beginner">Beginner (New to coding)</option>
-                            <option value="intermediate">Intermediate (Know Python)</option>
-                            <option value="advanced">Advanced (Proficient in ROS/AI)</option>
+                        <label>Software Experience</label>
+                        <select name="softwareExp" onChange={handleChange} defaultValue="beginner">
+                            <option value="beginner">Beginner (No coding experience)</option>
+                            <option value="intermediate">Intermediate (Some Python/JS)</option>
+                            <option value="advanced">Advanced (Professional developer)</option>
                         </select>
                     </div>
 
                     <div className="form-group">
                         <label>Hardware Experience</label>
-                        <select name="hardwareExp" onChange={handleChange}>
-                            <option value="none">None</option>
+                        <select name="hardwareExp" onChange={handleChange} defaultValue="none">
+                            <option value="none">No hardware experience</option>
                             <option value="arduino">Arduino/Raspberry Pi</option>
-                            <option value="robotics">Robotics Kits (Jetson, etc.)</option>
+                            <option value="robotics">Robotics (ROS/Gazebo)</option>
+                            <option value="advanced">Advanced (NVIDIA Isaac/Jetson)</option>
                         </select>
                     </div>
 
                     <div className="form-group">
                         <label>Education Level</label>
-                        <select name="education" onChange={handleChange}>
-                            <option value="school">High School</option>
+                        <select name="education" onChange={handleChange} defaultValue="undergrad">
+                            <option value="highschool">High School</option>
                             <option value="undergrad">Undergraduate</option>
-                            <option value="grad">Graduate/Professional</option>
+                            <option value="graduate">Graduate (MS/PhD)</option>
+                            <option value="professional">Working Professional</option>
                         </select>
                     </div>
 
@@ -104,6 +105,10 @@ export default function Signup() {
                         {loading ? 'Creating Account...' : 'Sign Up'}
                     </button>
                 </form>
+
+                <p style={{ marginTop: '1rem', textAlign: 'center' }}>
+                    Already have an account? <a href="/signin">Sign In</a>
+                </p>
             </div>
         </Layout>
     );

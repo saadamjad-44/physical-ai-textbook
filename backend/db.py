@@ -14,23 +14,11 @@ def get_connection():
 
 
 def create_tables():
-    """Create users and chat_history tables if they don't exist."""
+    """Create chat_history table if it doesn't exist.
+    Note: User tables are managed by better-auth server."""
     conn = get_connection()
     cur = conn.cursor()
     try:
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                name VARCHAR(255) NOT NULL,
-                email VARCHAR(255) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL,
-                software_exp VARCHAR(50) DEFAULT 'beginner',
-                hardware_exp VARCHAR(50) DEFAULT 'none',
-                education VARCHAR(50) DEFAULT 'undergrad',
-                goals TEXT DEFAULT '',
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            );
-        """)
         cur.execute("""
             CREATE TABLE IF NOT EXISTS chat_history (
                 id SERIAL PRIMARY KEY,
@@ -41,57 +29,10 @@ def create_tables():
             );
         """)
         conn.commit()
-        print("✅ Database tables created successfully.")
+        print("✅ Chat history table ready.")
     except Exception as e:
         print(f"❌ Error creating tables: {e}")
         conn.rollback()
-    finally:
-        cur.close()
-        conn.close()
-
-
-def save_user(name, email, password, software_exp, hardware_exp, education, goals):
-    """Save a new user to the database."""
-    conn = get_connection()
-    cur = conn.cursor()
-    try:
-        cur.execute(
-            """INSERT INTO users (name, email, password, software_exp, hardware_exp, education, goals)
-               VALUES (%s, %s, %s, %s, %s, %s, %s)
-               RETURNING id, name, email, software_exp, hardware_exp, education, goals""",
-            (name, email, password, software_exp, hardware_exp, education, goals)
-        )
-        user = cur.fetchone()
-        conn.commit()
-        return dict(user)
-    except psycopg2.errors.UniqueViolation:
-        conn.rollback()
-        return None  # Email already exists
-    except Exception as e:
-        conn.rollback()
-        raise e
-    finally:
-        cur.close()
-        conn.close()
-
-
-def get_user(email, password=None):
-    """Get a user by email.  If password is provided, check credentials."""
-    conn = get_connection()
-    cur = conn.cursor()
-    try:
-        if password:
-            cur.execute(
-                "SELECT id, name, email, software_exp, hardware_exp, education, goals FROM users WHERE email = %s AND password = %s",
-                (email, password)
-            )
-        else:
-            cur.execute(
-                "SELECT id, name, email, software_exp, hardware_exp, education, goals FROM users WHERE email = %s",
-                (email,)
-            )
-        user = cur.fetchone()
-        return dict(user) if user else None
     finally:
         cur.close()
         conn.close()

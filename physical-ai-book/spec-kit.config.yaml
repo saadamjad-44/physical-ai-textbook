@@ -1,14 +1,66 @@
 # Spec-Kit Plus Configuration
+# https://github.com/panaversity/spec-kit-plus
+
 project_name: "Physical AI & Humanoid Robotics Textbook"
+description: "An AI-native textbook for teaching Physical AI and Humanoid Robotics"
 docs_path: "./docs"
 output_path: "./specs"
 ai_engine: "gemini-1.5-flash"
+
+# Course Modules
 modules:
-  - name: "ROS 2"
+  - name: "Hardware Requirements"
+    path: "hardware"
+    chapters:
+      - "requirements"
+      - "01-workstation-setup"
+      - "02-jetson-setup"
+      - "03-sensors-actuators"
+
+  - name: "ROS 2 Fundamentals"
     path: "module-1-ros2"
-  - name: "Simulation"
+    chapters:
+      - "01-ros2-basics"
+      - "02-installation"
+      - "03-workspace"
+      - "04-python-nodes"
+
+  - name: "Simulation (Gazebo & Unity)"
     path: "module-2-simulation"
-  - name: "NVIDIA Isaac"
+    chapters:
+      - "01-gazebo-sim"
+      - "02-urdf-xacro"
+      - "03-gazebo-worlds"
+
+  - name: "NVIDIA Isaac Platform"
     path: "module-3-nvidia-isaac"
-  - name: "VLA"
+    chapters:
+      - "01-nvidia-isaac"
+      - "02-installation"
+      - "03-importing-robots"
+      - "04-ros2-bridge"
+
+  - name: "Vision-Language-Action (VLA)"
     path: "module-4-vla"
+    chapters:
+      - "01-vla-basics"
+      - "02-vla-models"
+      - "03-inference"
+
+# Features
+features:
+  rag_chatbot: true
+  personalization: true
+  urdu_translation: true
+  text_selection_qa: true
+  better_auth: true
+
+# Tech Stack
+tech_stack:
+  frontend: "Docusaurus 3 (React/TypeScript)"
+  backend: "FastAPI (Python)"
+  auth: "better-auth (Node.js)"
+  database: "Neon Serverless Postgres"
+  vector_db: "Qdrant Cloud"
+  ai_engine: "Google Gemini 1.5 Flash"
+  deployment: "GitHub Pages"
