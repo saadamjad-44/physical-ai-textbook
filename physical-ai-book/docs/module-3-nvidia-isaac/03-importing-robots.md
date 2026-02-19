@@ -1,8 +1,12 @@
----
-sidebar_position: 3
----
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
 
 # 3. Importing Robots (URDF to USD)
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 Isaac Sim uses USD (Universal Scene Description) format. We need to convert our ROS URDF models to USD.
 

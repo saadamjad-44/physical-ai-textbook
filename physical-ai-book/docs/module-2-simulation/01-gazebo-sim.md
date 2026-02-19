@@ -1,4 +1,12 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 # Module 2: The Digital twin (Gazebo & Unity)
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 ## Why Simulation?
 

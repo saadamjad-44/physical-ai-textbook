@@ -1,8 +1,16 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 ---
 sidebar_position: 3
 ---
 
-# 3. Creating a Workspace
+# 3. Workspaces & Packages
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 In ROS 2, you work within a `colcon` workspace. This is a directory where you build your packages.
 

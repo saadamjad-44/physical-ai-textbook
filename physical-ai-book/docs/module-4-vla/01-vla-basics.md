@@ -1,4 +1,12 @@
-# Module 4: Vision-Language-Action (VLA)
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
+# 1. Vision-Language-Action (VLA)
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 ## The Convergence of LLMs and Robotics
 

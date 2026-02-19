@@ -1,4 +1,12 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 # Module 1: The Robotic Nervous System (ROS 2)
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 ## What is ROS 2?
 

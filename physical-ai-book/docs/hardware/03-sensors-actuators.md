@@ -2,7 +2,15 @@
 sidebar_position: 3
 ---
 
-# 3. Sensors & Actuators Setup
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
+# 3. Sensors & Actuators
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
+Setup
 
 This guide covers setting up the "Eyes" (Intel RealSense) and "Legs" (Unitree Robot) of your system.
 

@@ -5,11 +5,14 @@ import { useHistory } from '@docusaurus/router';
 import './auth.css';
 
 export default function Signup() {
-    const { login } = useAuth();
+    const { signup } = useAuth();
     const history = useHistory();
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
+        password: '',
         softwareExp: 'beginner',
         hardwareExp: 'none',
         education: 'undergrad',
@@ -20,10 +23,19 @@ export default function Signup() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        login(formData);
-        history.push('/');
+        setError('');
+        setLoading(true);
+
+        const result = await signup(formData);
+        setLoading(false);
+
+        if (result.success) {
+            history.push('/');
+        } else {
+            setError(result.error || 'Signup failed');
+        }
     };
 
     return (
@@ -31,6 +43,12 @@ export default function Signup() {
             <div className="auth-container">
                 <h1>Create Account</h1>
                 <p>Tell us about yourself to personalize your learning experience.</p>
+
+                {error && (
+                    <div className="alert alert--danger" style={{ marginBottom: '1rem' }}>
+                        {error}
+                    </div>
+                )}
 
                 <form onSubmit={handleSubmit} className="auth-form">
                     <div className="form-group">
@@ -41,6 +59,11 @@ export default function Signup() {
                     <div className="form-group">
                         <label>Email</label>
                         <input required type="email" name="email" onChange={handleChange} />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Password</label>
+                        <input required type="password" name="password" minLength={6} onChange={handleChange} />
                     </div>
 
                     <h3>Background Information</h3>
@@ -77,7 +100,9 @@ export default function Signup() {
                         <textarea name="goals" placeholder="What do you want to build?" onChange={handleChange}></textarea>
                     </div>
 
-                    <button type="submit" className="auth-btn">Sign Up</button>
+                    <button type="submit" className="auth-btn" disabled={loading}>
+                        {loading ? 'Creating Account...' : 'Sign Up'}
+                    </button>
                 </form>
             </div>
         </Layout>

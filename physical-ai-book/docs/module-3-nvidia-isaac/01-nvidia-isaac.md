@@ -1,6 +1,12 @@
-# Module 3: The AI-Robot Brain (NVIDIA Isaac™)
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
 
-## NVIDIA Isaac Sim™
+# 1. NVIDIA Isaac Sim™
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 Isaac Sim is a robotics simulation application and synthetic data generation tool. It leverages NVIDIA Omniverse™ to provide photorealistic, physically accurate, and high-performance simulations.
 

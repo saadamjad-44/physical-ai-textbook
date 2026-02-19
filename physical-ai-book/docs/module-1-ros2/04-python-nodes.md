@@ -1,8 +1,12 @@
----
-sidebar_position: 4
----
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
 
 # 4. Writing Python Nodes
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 This tutorial shows how to create a simple Publisher and Subscriber in Python.
 

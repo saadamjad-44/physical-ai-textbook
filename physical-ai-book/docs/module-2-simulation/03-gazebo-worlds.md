@@ -1,8 +1,16 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 ---
 sidebar_position: 3
 ---
 
-# 3. Creating Gazebo Worlds
+# 3. Custom Gazebo Worlds
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 Gazebo is a 3D simulator that integrates with ROS 2. It allows us to create complex environments to test our robots.
 

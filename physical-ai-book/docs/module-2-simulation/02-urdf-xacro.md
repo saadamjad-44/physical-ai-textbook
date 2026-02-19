@@ -1,8 +1,17 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 ---
 sidebar_position: 2
 ---
 
-# 2. Robot Modeling (URDF & Xacro)
+# 2. URDF & Xacro Robot Modeling
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
+ (URDF & Xacro)
 
 The Unified Robot Description Format (URDF) is an XML format used to describe the robot's physical structure (links) and joints.
 

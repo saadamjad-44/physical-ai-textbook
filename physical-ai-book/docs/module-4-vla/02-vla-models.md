@@ -1,8 +1,13 @@
----
-sidebar_position: 2
----
+```
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
 
-# 2. VLA Models Overview
+# 2. VLA Models: RT-2 and OpenVLA
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 Vision-Language-Action (VLA) models are the cutting edge of physical AI. They enable robots to understand natural language and visual input to generate physical actions.
 

@@ -1,8 +1,16 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 ---
 sidebar_position: 2
 ---
 
-# 2. Isaac Sim Installation
+# 2. Omniverse & Isaac Sim Installation
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 NVIDIA Isaac Sim is a photorealistic, physically accurate virtual environment for developing, testing, and managing AI-based robots.
 

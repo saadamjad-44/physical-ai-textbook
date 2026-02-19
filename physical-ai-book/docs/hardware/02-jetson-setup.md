@@ -1,8 +1,16 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 ---
 sidebar_position: 2
 ---
 
-# 2. NVIDIA Jetson Setup
+# 2. Jetson Orin Nano Setup
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 The NVIDIA Jetson Orin Nano/NX acts as the "Brain" of your robot. It runs the neural networks for perception (vision) and high-level decision making.
 

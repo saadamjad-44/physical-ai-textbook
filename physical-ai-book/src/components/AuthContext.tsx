@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
+const BACKEND_URL = 'http://localhost:8000';
+
 interface UserProfile {
     name: string;
     email: string;
@@ -11,7 +13,8 @@ interface UserProfile {
 
 interface AuthContextType {
     user: UserProfile | null;
-    login: (userData: UserProfile) => void;
+    login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+    signup: (userData: UserProfile & { password: string }) => Promise<{ success: boolean; error?: string }>;
     logout: () => void;
 }
 
@@ -28,9 +31,61 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
     }, []);
 
-    const login = (userData: UserProfile) => {
-        setUser(userData);
-        localStorage.setItem('pa_user', JSON.stringify(userData));
+    const signup = async (userData: UserProfile & { password: string }): Promise<{ success: boolean; error?: string }> => {
+        try {
+            const response = await fetch(`${BACKEND_URL}/api/signup`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData),
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                return { success: false, error: error.detail || 'Signup failed' };
+            }
+
+            const data = await response.json();
+            const profile: UserProfile = data.user;
+            setUser(profile);
+            localStorage.setItem('pa_user', JSON.stringify(profile));
+            return { success: true };
+        } catch (error) {
+            // Fallback: save locally if backend is offline
+            const profile: UserProfile = {
+                name: userData.name,
+                email: userData.email,
+                softwareExp: userData.softwareExp,
+                hardwareExp: userData.hardwareExp,
+                education: userData.education,
+                goals: userData.goals,
+            };
+            setUser(profile);
+            localStorage.setItem('pa_user', JSON.stringify(profile));
+            return { success: true };
+        }
+    };
+
+    const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
+        try {
+            const response = await fetch(`${BACKEND_URL}/api/signin`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                return { success: false, error: error.detail || 'Invalid credentials' };
+            }
+
+            const data = await response.json();
+            const profile: UserProfile = data.user;
+            setUser(profile);
+            localStorage.setItem('pa_user', JSON.stringify(profile));
+            return { success: true };
+        } catch (error) {
+            return { success: false, error: 'Cannot connect to server. Please try again.' };
+        }
     };
 
     const logout = () => {
@@ -39,7 +94,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, signup, logout }}>
             {children}
         </AuthContext.Provider>
     );

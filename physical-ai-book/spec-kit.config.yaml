@@ -1,0 +1,14 @@
+# Spec-Kit Plus Configuration
+project_name: "Physical AI & Humanoid Robotics Textbook"
+docs_path: "./docs"
+output_path: "./specs"
+ai_engine: "gemini-1.5-flash"
+modules:
+  - name: "ROS 2"
+    path: "module-1-ros2"
+  - name: "Simulation"
+    path: "module-2-simulation"
+  - name: "NVIDIA Isaac"
+    path: "module-3-nvidia-isaac"
+  - name: "VLA"
+    path: "module-4-vla"

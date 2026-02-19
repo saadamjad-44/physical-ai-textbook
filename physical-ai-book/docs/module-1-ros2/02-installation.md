@@ -1,10 +1,17 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 ---
 sidebar_position: 2
 ---
 
-# 2. ROS 2 Installation
+# 2. Installation (ROS 2 Humble)
 
-We use **ROS 2 Humble Hawksbill** on Ubuntu 22.04 LTS. This is a Long Term Support (LTS) release, supported until May 2027.
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
+ **ROS 2 Humble Hawksbill** on Ubuntu 22.04 LTS. This is a Long Term Support (LTS) release, supported until May 2027.
 
 ## 1. Set Locale
 

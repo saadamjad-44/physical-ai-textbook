@@ -33,9 +33,12 @@ def search_content(query, limit=3):
     ).points
     return search_result
 
-def generate_answer(query, context_chunks):
+def generate_answer(query, search_results=None, context_text=None):
     """Generate a response using Gemini 1.5 Flash with textbook context."""
-    context_text = "\n\n".join([c.payload['text'] for c in context_chunks])
+    if context_text is None and search_results:
+        context_text = "\n\n".join([c.payload['text'] for c in search_results])
+    elif context_text is None:
+        context_text = "No context available."
     
     prompt = f"""
     You are a Physical AI and Robotics expert assistant. 

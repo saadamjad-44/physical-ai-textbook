@@ -1,8 +1,12 @@
----
-sidebar_position: 3
----
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
 
 # 3. Inference on Edge
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 Running VLAs on the Jetson Orin requires optimization, as these models are large (7B+ parameters).
 

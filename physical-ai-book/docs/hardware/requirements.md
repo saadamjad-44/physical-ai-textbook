@@ -1,4 +1,12 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 # Hardware Requirements
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 Physical AI is computationally demanding. It involves Physics Simulation, Visual Perception, and Generative AI.
 

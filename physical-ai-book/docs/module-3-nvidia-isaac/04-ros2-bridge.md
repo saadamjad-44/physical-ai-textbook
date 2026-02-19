@@ -1,10 +1,17 @@
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
+
 ---
 sidebar_position: 4
 ---
 
-# 4. ROS 2 Bridge
+# 4. Connecting Isaac Sim to ROS 2
 
-The ROS 2 Bridge allows Isaac Sim to communicate with your ROS 2 ecosystem (RViz, your nodes, etc.).
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
+ Bridge allows Isaac Sim to communicate with your ROS 2 ecosystem (RViz, your nodes, etc.).
 
 ## 1. Enable the Extension
 

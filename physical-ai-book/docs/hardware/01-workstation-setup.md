@@ -1,8 +1,12 @@
----
-sidebar_position: 1
----
+import PersonalizeButton from '@site/src/components/PersonalizeButton';
+import TranslateButton from '@site/src/components/TranslateButton';
 
 # 1. Digital Twin Workstation Setup
+
+<div style={{display: 'flex', alignItems: 'center'}}>
+  <PersonalizeButton />
+  <TranslateButton />
+</div>
 
 This guide details how to set up your primary development machine. This machine will run the heavy physics simulations (NVIDIA Isaac Sim) and train large models.
 
